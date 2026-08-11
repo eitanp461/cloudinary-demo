@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wander — Places worth seeing.</title>
+<meta name="description" content="Wander is a travel journal about landscapes, coastlines and cities worth the detour.">
+<link rel="stylesheet" href="assets/styles.css">
+
+<!-- Images come from Cloudinary instead of assets/. Same markup, same CSS, same
+     photographs, same aspect ratios — only the bytes change.
+
+     f_auto   negotiates AVIF / WebP / JPEG from the request's Accept header
+     q_auto   picks a per-image quality from the image's own content
+     c_limit  scales down to the requested width, never up
+     srcset   lets the browser ask for the width it will actually paint
+
+     Aspect ratios are deliberately left at the originals' so the CSS crops the
+     hero exactly as it does in /before/, and each tile pins `aspect-ratio` to
+     its original dimensions — Cloudinary rounds a resized height to a whole
+     pixel, and without the pin that rounding would shift a column by 1px. -->
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html">Wander</a>
+  <nav class="nav">
+    <a href="#gallery">Gallery</a>
+    <a href="#journal">Journal</a>
+    <a href="../index.html">Index</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img class="hero-img"
+       src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1280/wander/hero-yosemite-valley"
+       srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/hero-yosemite-valley 640w,
+               https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_960/wander/hero-yosemite-valley 960w,
+               https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1280/wander/hero-yosemite-valley 1280w,
+               https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1600/wander/hero-yosemite-valley 1600w,
+               https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_2000/wander/hero-yosemite-valley 2000w,
+               https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_2400/wander/hero-yosemite-valley 2400w"
+       sizes="calc(min(100vw, 76rem) - 3rem)"
+       width="7952" height="5304"
+       fetchpriority="high"
+       alt="A wide granite valley at sunrise, with mist settling between forested cliffs.">
+  <div class="hero-caption">
+    <span class="kicker">Issue 04 — The Long Way Round</span>
+    <p class="credit">Photograph by Aniket Deole</p>
+  </div>
+</section>
+
+<main>
+
+  <section class="intro" id="journal">
+    <h1>Places worth seeing.</h1>
+    <p class="lede">
+      We keep a slow list — places that ask for an early start and a longer detour.
+      A lake like cold glass, a road with nothing at either end.
+    </p>
+    <p class="byline">Words &amp; edit — the Wander desk</p>
+  </section>
+
+  <section class="gallery" id="gallery">
+    <h2 class="section-title">Selected frames</h2>
+
+    <div class="grid">
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/mountain-lake-braies"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/mountain-lake-braies 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/mountain-lake-braies 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/mountain-lake-braies 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/mountain-lake-braies 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/mountain-lake-braies 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/mountain-lake-braies 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/mountain-lake-braies 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="3966" height="5949"
+             style="aspect-ratio: 3966 / 5949"
+             loading="lazy" decoding="async"
+             alt="A still alpine lake below a steep grey mountain, pines crowding the far shore.">
+        <figcaption>
+          <span class="place">Pragser Wildsee, Italy</span>
+          <span class="credit">Photograph by Pietro De Grandi</span>
+        </figcaption>
+      </figure>
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/ocean-waves"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/ocean-waves 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/ocean-waves 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/ocean-waves 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/ocean-waves 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/ocean-waves 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/ocean-waves 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/ocean-waves 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="4957" height="3305"
+             style="aspect-ratio: 4957 / 3305"
+             loading="lazy" decoding="async"
+             alt="A single deep blue wave curling over itself in open water.">
+        <figcaption>
+          <span class="place">Open water, North Atlantic</span>
+          <span class="credit">Photograph by Silas Baisch</span>
+        </figcaption>
+      </figure>
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/coastal-road"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/coastal-road 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/coastal-road 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/coastal-road 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/coastal-road 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/coastal-road 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/coastal-road 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/coastal-road 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="4008" height="6008"
+             style="aspect-ratio: 4008 / 6008"
+             loading="lazy" decoding="async"
+             alt="An empty asphalt road running out across bare coastal moorland.">
+        <figcaption>
+          <span class="place">West coast, Ireland</span>
+          <span class="credit">Photograph by James Langley</span>
+        </figcaption>
+      </figure>
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/city-skyline"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/city-skyline 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/city-skyline 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/city-skyline 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/city-skyline 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/city-skyline 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/city-skyline 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/city-skyline 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="3465" height="2131"
+             style="aspect-ratio: 3465 / 2131"
+             loading="lazy" decoding="async"
+             alt="Dense city towers seen across low rooftops in flat daylight.">
+        <figcaption>
+          <span class="place">Downtown, first light</span>
+          <span class="credit">Photograph by Pedro Lastra</span>
+        </figcaption>
+      </figure>
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/forest-aerial"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/forest-aerial 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/forest-aerial 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/forest-aerial 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/forest-aerial 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/forest-aerial 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/forest-aerial 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/forest-aerial 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="3840" height="5760"
+             style="aspect-ratio: 3840 / 5760"
+             loading="lazy" decoding="async"
+             alt="Looking straight down onto a dense canopy of green conifers.">
+        <figcaption>
+          <span class="place">Somewhere above the treeline</span>
+          <span class="credit">Photograph by Filip Zrnzević</span>
+        </figcaption>
+      </figure>
+
+      <figure class="tile">
+        <img src="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/seashore-aerial"
+             srcset="https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_320/wander/seashore-aerial 320w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_480/wander/seashore-aerial 480w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_640/wander/seashore-aerial 640w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_800/wander/seashore-aerial 800w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1000/wander/seashore-aerial 1000w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1200/wander/seashore-aerial 1200w,
+                     https://res.cloudinary.com/ka8stfl5/image/upload/f_auto,q_auto,c_limit,w_1400/wander/seashore-aerial 1400w"
+             sizes="(max-width: 46rem) calc(100vw - 3rem), calc((min(100vw, 76rem) - 5rem) / 2)"
+             width="3070" height="5464"
+             style="aspect-ratio: 3070 / 5464"
+             loading="lazy" decoding="async"
+             alt="Aerial view of pale surf breaking along a narrow sandbar.">
+        <figcaption>
+          <span class="place">Shallows, Indian Ocean</span>
+          <span class="credit">Photograph by Shifaaz shamoon</span>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <section class="closing">
+    <p>
+      Next issue: three weeks of ferries, a borrowed tent, and the argument about
+      whether a lighthouse counts as a destination.
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Wander — a demonstration site. Photographs by their respective authors via Unsplash.</p>
+  <p><a href="../index.html">Back to index</a></p>
+</footer>
+
+</body>
+</html>

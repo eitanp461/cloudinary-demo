@@ -3,7 +3,8 @@
 All seven photographs are from the standard (free) Unsplash library, used under the
 [Unsplash License](https://unsplash.com/license). No Unsplash+ / Premium images are used.
 Each file in `before/assets/` is the unmodified original JPEG downloaded from
-`images.unsplash.com`.
+`images.unsplash.com`. `/after/` serves those same originals through Cloudinary,
+resized and recompressed for delivery; no image is cropped, retouched, or replaced.
 
 ## Hero
 
