@@ -31,8 +31,11 @@ Every image is 2.7–4.4× wider than its layout slot needs at 2× DPR, so 86–
 decoded pixels are discarded. Three images totalling 16.78 MiB sit above the fold at any
 viewport height from 600 px up, which is 54% of the payload.
 
-Images account for 99.97% of the page: HTML is 4.2 KB, CSS is 4.6 KB, JavaScript is 0 B.
+Images account for 99.97% of the page: HTML is 4.2 KB, CSS is 4.9 KB, JavaScript is 0 B.
 The page makes no requests to external domains.
+
+GitHub Pages gzips the HTML and CSS but not the JPEGs — already-compressed image data
+does not shrink, so the 31 MiB crosses the wire intact.
 
 ## Running locally
 
