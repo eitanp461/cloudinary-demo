@@ -34,7 +34,18 @@
     line-height: 1.1;
     margin: 0 0 0.9rem;
   }
-  .blurb { color: #55504a; margin: 0 0 2.25rem; }
+  .blurb { color: #55504a; margin: 0 0 1.75rem; }
+  /* Margins collapse against .blurb's, so the first group heading sits the
+     same 2rem below the blurb as the second sits below the list above it. */
+  .group {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8c857c;
+    margin: 2rem 0 0.5rem;
+  }
   ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid #ded8cf; }
   li { border-bottom: 1px solid #ded8cf; }
   a.row {
@@ -73,9 +84,10 @@
   <h1>Wander</h1>
   <p class="blurb">
     The same editorial travel page, served two ways. Load each one with the network panel
-    open and compare the image payload.
+    open and compare the media payload.
   </p>
 
+  <p class="group">Images</p>
   <ul>
     <li>
       <a class="row" href="before/index.html">
@@ -91,8 +103,24 @@
     </li>
   </ul>
 
+  <p class="group">Video</p>
+  <ul>
+    <li>
+      <a class="row" href="video-before/index.html">
+        <span class="label">Before</span>
+        <span class="note">1 original 4K MP4 &middot; ~43 MB</span>
+      </a>
+    </li>
+    <li>
+      <a class="row" href="video-after/index.html">
+        <span class="label">After</span>
+        <span class="note">Cloudinary responsive, portrait tracking-crop &middot; 0.5&ndash;0.6 MB</span>
+      </a>
+    </li>
+  </ul>
+
   <footer>
-    <a href="CREDITS.md">Photo credits</a>
+    <a href="CREDITS.md">Media credits</a>
   </footer>
 </main>
 </body>

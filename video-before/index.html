@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wander — A morning, indoors.</title>
+<meta name="description" content="A short film from the Wander desk: a rained-out week, a borrowed kitchen, and the man who kept refilling the glass.">
+<link rel="stylesheet" href="assets/styles.css">
+
+<!-- The unoptimized baseline for video.
+
+     assets/host-at-home.mp4 is the camera-original download: 4096 x 2160,
+     24 fps, H.264 High profile, 16.4 s, no audio track, 43.3 MB at ~22 Mbps.
+     It is dropped into a single <video> tag exactly as a page would if nobody
+     had thought about delivery:
+
+       - one rendition for every viewport, so a 390px phone downloads the
+         same 4K file a 5K display does
+       - one codec, H.264, so no browser is offered AV1, VP9 or HEVC
+       - progressive MP4 rather than HLS or DASH, so there is no way to
+         adapt to a slow connection mid-stream
+       - preload="auto", so the fetch starts on load whether or not the
+         viewer ever presses play
+       - no poster, so the box stays empty until enough video has arrived
+         to paint the first frame
+
+     It autoplays muted (the original has no audio track) but deliberately does
+     not loop: with the cache off, each loop re-fetches all 43 MB, and the
+     baseline is easier to argue about as one download per page load.
+
+     /before/ and /after/ do the same comparison for still images. -->
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html">Wander</a>
+  <nav class="nav">
+    <a href="#film">Film</a>
+    <a href="#journal">Journal</a>
+    <a href="../index.html">Index</a>
+  </nav>
+</header>
+
+<section class="film" id="film">
+  <video class="film-player"
+         src="assets/host-at-home.mp4"
+         width="4096" height="2160"
+         preload="auto"
+         autoplay muted playsinline
+         controls></video>
+  <div class="film-caption">
+    <span class="kicker">Issue 04 — Field Film</span>
+    <p class="credit">Film by Yaroslav Shuraev</p>
+  </div>
+</section>
+
+<main>
+
+  <section class="intro" id="journal">
+    <h1>A morning, indoors.</h1>
+    <p class="lede">
+      Rain all week, so the film we came home with isn't the coastline at all.
+      It is a borrowed kitchen, a hat that never came off, and a host who kept
+      refilling the glass until the weather made up its mind.
+    </p>
+    <p class="byline">Words &amp; edit — the Wander desk</p>
+  </section>
+
+  <section class="notes">
+    <h2 class="section-title">Field notes</h2>
+    <p class="lede">
+      We had planned four days on the water and got one. The rest went the way
+      those weeks go: a table by the window, a radio nobody turned off, and the
+      slow business of learning a household's timings — when the kettle goes on,
+      which chair is not yours, how long a shower counts as short.
+    </p>
+    <p class="lede">
+      Sixteen seconds is all we kept. It is the closest thing to a portrait we
+      have of the trip, and it was shot standing still, indoors, waiting.
+    </p>
+  </section>
+
+  <section class="closing">
+    <p>
+      Next issue: three weeks of ferries, a borrowed tent, and the argument about
+      whether a lighthouse counts as a destination.
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Wander — a demonstration site. Film by Yaroslav Shuraev via Pexels.</p>
+  <p><a href="../index.html">Back to index</a></p>
+</footer>
+
+</body>
+</html>

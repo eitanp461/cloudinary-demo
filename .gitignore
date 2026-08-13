@@ -1,2 +1,5 @@
 # Cloudinary credentials written by `npx @cloudinary/cloud`
 .env
+
+# serve.py bytecode
+__pycache__/

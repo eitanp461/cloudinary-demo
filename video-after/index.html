@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wander — A morning, indoors.</title>
+<meta name="description" content="A short film from the Wander desk: a rained-out week, a borrowed kitchen, and the man who kept refilling the glass.">
+<link rel="stylesheet" href="assets/styles.css">
+
+<!-- The film comes from Cloudinary instead of assets/. Same markup, same CSS, same
+     film, same box — only the bytes change. /video-before/ is the baseline.
+
+     f_auto:video  negotiates the container and codec per browser, so a modern
+                   Chrome is offered VP9/WebM or AV1 and Safari HEVC, where
+                   /video-before/ can only ever serve H.264. The `:video`
+                   qualifier is required because these URLs carry no file
+                   extension — without it f_auto would resolve to an image.
+     q_auto        picks a per-video quality from the content itself
+     c_limit,w_<n> scales down to the requested width, never up
+
+     Responsive is done with `media` on <source> — the video counterpart of the
+     `srcset`/`sizes` pair in /after/, and, like it, resolved by the browser with
+     no JavaScript. The player box is calc(min(100vw, 76rem) - 3rem) wide, so it
+     tops out at 1168 CSS px; each tier below asks for the smallest rendition
+     that still covers that box at that viewport and pixel density:
+
+         viewport             1x     hi-DPI   delivered as
+         portrait <= 30rem    480      960    4:5, tracking crop
+         <= 30rem             480      960    1.896:1, uncropped
+         <= 46rem             720     1440    1.896:1
+         <= 60rem             960     1920    1.896:1
+         wider               1280     1920    1.896:1
+
+     Sources are evaluated top to bottom and the first match wins, so the tiers
+     run narrow to wide and the last <source> carries no `media` at all as the
+     catch-all. The hi-DPI column is capped at 1920 rather than the 2336 a 2dppx
+     display would imply: past roughly 1.6x density the extra lines are not
+     visible in 24fps motion, and they cost about twice the bytes.
+
+     A browser that does not understand `max-resolution` fails those queries
+     rather than misreading them, and falls through to the next, coarser tier —
+     it over-serves a little, it never breaks.
+
+     One caveat worth stating rather than discovering: a browser that ignores
+     `media` on <source> altogether takes the first source it can play, which
+     here is the narrow portrait crop. Chrome has honoured it since 3 and Safari
+     since 3.1, but Firefox 53-119 honoured it only inside <picture>, so those
+     versions would show the 4:5 crop at any window size. Firefox 120 shipped in
+     2023 and fixed it; the ladder is ordered narrow-to-wide for everyone else's
+     benefit, so this is left as a known limit of the technique.
+
+     The portrait tier is the one place this page deliberately stops matching
+     /video-before/. Letterboxed into a 390px-wide phone the 1.896:1 film is a
+     206px strip, so those two sources ask for a 4:5 crop instead and the CSS
+     takes the box edge to edge — 2.4x the on-screen area. Cropping 1.896:1 down
+     to 4:5 keeps only 42% of the width, and the subject does not sit in the
+     middle of the frame, so a plain centre crop slices his face; g_auto is what
+     makes the crop usable:
+
+     c_fill,g_auto  a tracking crop. Cloudinary analyses the whole film and moves
+                    the crop window to follow the subject, easing between frames
+                    rather than cutting. c_fill (or c_fill_pad) is required —
+                    g_auto is ignored by the resize-only modes.
+
+     Two things about g_auto are easy to get wrong and both are load-bearing here:
+
+     1. It must sit in its own transformation component, and that component has
+        to come FIRST. `f_auto:video,q_auto,...,g_auto` in one component is a 400
+        ("g_auto must be in a transformation component by itself"), and putting
+        the delivery component first is a 500. Only crop-then-deliver works.
+     2. Dropping f_auto/q_auto from the second component silently costs the codec
+        negotiation: the same crop comes back as 607 kB of H.264 instead of
+        266 kB of VP9.
+
+     Which is why the portrait tier is the one place naming codecs explicitly
+     beats f_auto. Behind a chained crop f_auto only ever negotiated half the
+     way: Chrome and Firefox got VP9, but Safari — the browser that matters most
+     in portrait — got H.264 at 1.56 MB, even though the very same crop encodes
+     to HEVC at 771 kB when asked directly. Five component arrangements were
+     tried and none restored it, so each portrait tier states its formats and
+     lets the browser pick by `type` instead:
+
+                 VP9/WebM   HEVC/MP4   what f_auto handed Safari
+         w_480     266 kB     350 kB     607 kB
+         w_960     584 kB     771 kB   1,562 kB
+
+     WebM is listed first because here VP9 is the smaller of the two for
+     everyone who can play it, and HEVC then catches Safari. Anything that can
+     play neither falls through to the landscape sources below, where f_auto
+     does still negotiate properly; the CSS crops that wide frame to fit, which
+     is a worse frame than g_auto picks but not a broken page.
+
+     A tracking crop is also derived asynchronously — Cloudinary answers 423
+     while it analyses — so these renditions have to exist before a real visitor
+     arrives. Worth knowing: the first success after derivation can still be the
+     un-negotiated H.264 fallback at the right dimensions, so warming means
+     waiting for the codec you asked for, not merely for a 200.
+
+     poster is a still of frame 0 pulled from the same asset (so_0), so the first
+     frame is painted before any video arrives instead of leaving the black box
+     /video-before/ shows. preload="metadata" replaces the baseline's
+     preload="auto": autoplay still starts the fetch here, but if a browser or a
+     data saver blocks autoplay the viewer gets the poster and a play button
+     instead of an unrequested download.
+
+     Behaviour is deliberately unchanged from /video-before/: autoplays muted
+     (the original has no audio track), shows controls, and does not loop.
+
+     /before/ and /after/ do the same comparison for still images. -->
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="index.html">Wander</a>
+  <nav class="nav">
+    <a href="#film">Film</a>
+    <a href="#journal">Journal</a>
+    <a href="../index.html">Index</a>
+  </nav>
+</header>
+
+<section class="film" id="film">
+  <video class="film-player"
+         width="4096" height="2160"
+         poster="https://res.cloudinary.com/zosttxi5/video/upload/so_0,f_auto,q_auto,c_limit,w_1280/wander/host-at-home.jpg"
+         preload="metadata"
+         autoplay muted playsinline
+         controls>
+    <source media="(orientation: portrait) and (max-width: 30rem) and (max-resolution: 1.5dppx)"
+            type='video/webm; codecs="vp9"'
+            src="https://res.cloudinary.com/zosttxi5/video/upload/ar_4:5,c_fill,g_auto,w_480/f_webm,vc_vp9,q_auto/wander/host-at-home">
+    <source media="(orientation: portrait) and (max-width: 30rem) and (max-resolution: 1.5dppx)"
+            type='video/mp4; codecs="hvc1"'
+            src="https://res.cloudinary.com/zosttxi5/video/upload/ar_4:5,c_fill,g_auto,w_480/f_mp4,vc_h265,q_auto/wander/host-at-home">
+    <source media="(orientation: portrait) and (max-width: 30rem)"
+            type='video/webm; codecs="vp9"'
+            src="https://res.cloudinary.com/zosttxi5/video/upload/ar_4:5,c_fill,g_auto,w_960/f_webm,vc_vp9,q_auto/wander/host-at-home">
+    <source media="(orientation: portrait) and (max-width: 30rem)"
+            type='video/mp4; codecs="hvc1"'
+            src="https://res.cloudinary.com/zosttxi5/video/upload/ar_4:5,c_fill,g_auto,w_960/f_mp4,vc_h265,q_auto/wander/host-at-home">
+    <source media="(max-width: 30rem) and (max-resolution: 1.5dppx)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_480/wander/host-at-home">
+    <source media="(max-width: 30rem)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_960/wander/host-at-home">
+    <source media="(max-width: 46rem) and (max-resolution: 1.5dppx)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_720/wander/host-at-home">
+    <source media="(max-width: 46rem)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_1440/wander/host-at-home">
+    <source media="(max-width: 60rem) and (max-resolution: 1.5dppx)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_960/wander/host-at-home">
+    <source media="(max-width: 60rem)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_1920/wander/host-at-home">
+    <source media="(max-resolution: 1.5dppx)"
+            src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_1280/wander/host-at-home">
+    <source src="https://res.cloudinary.com/zosttxi5/video/upload/f_auto:video,q_auto,c_limit,w_1920/wander/host-at-home">
+  </video>
+  <div class="film-caption">
+    <span class="kicker">Issue 04 — Field Film</span>
+    <p class="credit">Film by Yaroslav Shuraev</p>
+  </div>
+</section>
+
+<main>
+
+  <section class="intro" id="journal">
+    <h1>A morning, indoors.</h1>
+    <p class="lede">
+      Rain all week, so the film we came home with isn't the coastline at all.
+      It is a borrowed kitchen, a hat that never came off, and a host who kept
+      refilling the glass until the weather made up its mind.
+    </p>
+    <p class="byline">Words &amp; edit — the Wander desk</p>
+  </section>
+
+  <section class="notes">
+    <h2 class="section-title">Field notes</h2>
+    <p class="lede">
+      We had planned four days on the water and got one. The rest went the way
+      those weeks go: a table by the window, a radio nobody turned off, and the
+      slow business of learning a household's timings — when the kettle goes on,
+      which chair is not yours, how long a shower counts as short.
+    </p>
+    <p class="lede">
+      Sixteen seconds is all we kept. It is the closest thing to a portrait we
+      have of the trip, and it was shot standing still, indoors, waiting.
+    </p>
+  </section>
+
+  <section class="closing">
+    <p>
+      Next issue: three weeks of ferries, a borrowed tent, and the argument about
+      whether a lighthouse counts as a destination.
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Wander — a demonstration site. Film by Yaroslav Shuraev via Pexels.</p>
+  <p><a href="../index.html">Back to index</a></p>
+</footer>
+
+</body>
+</html>
